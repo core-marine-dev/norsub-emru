@@ -1,0 +1,36 @@
+{
+  "name": "norsub-emru",
+  "version": "1.0.0",
+  "description": "Library to work with eMRU devices of NorSub company",
+  "author": "Core Marine",
+  "license": "MIT",
+  "homepage": "https://github.com/core-marine-dev/norsub-emru#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/core-marine-dev/norsub-emru.git"
+  },
+  "bugs": {
+    "url": "https://github.com/core-marine-dev/norsub-emru/issues"
+  },
+  "keywords": [
+    "mru",
+    "imu",
+    "norsub",
+    "norwegian subsea"
+  ],
+  "main": "lib/index.js",
+  "files": ["/lib"],
+  "scripts": {
+    "start": "node lib/index.js",
+    "dev": "ts-node-dev src/index.ts",
+    "test": "vitest",
+    "test:coverage": "vitest --coverage",
+    "lint": "ts-standard",
+    "lint-fix": "ts-standard --fix",
+    "build": "tsc"
+  },
+  "devDependencies": {
+    "typescript": "^5.2.2",
+    "vitest": "^0.34.3"
+  }
+}
