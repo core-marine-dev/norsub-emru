@@ -19,7 +19,9 @@
     "norwegian subsea"
   ],
   "main": "lib/index.js",
-  "files": ["/lib"],
+  "files": [
+    "/lib"
+  ],
   "scripts": {
     "start": "node lib/index.js",
     "dev": "ts-node-dev src/index.ts",
@@ -30,7 +32,11 @@
     "build": "tsc"
   },
   "devDependencies": {
+    "ts-node-dev": "^2.0.0",
     "typescript": "^5.2.2",
     "vitest": "^0.34.3"
+  },
+  "dependencies": {
+    "zod": "^3.22.2"
   }
 }
