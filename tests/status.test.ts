@@ -1,6 +1,7 @@
 import { test, expect } from 'vitest'
-import { Status, Uint32 } from '../src/types'
+import { Status, StatusInput, Uint16, Uint32 } from '../src/types'
 import { getStatus } from '../src/status'
+import { StatusSchema } from '../src/schemas'
 
 /** STATUS
  * Bit - Parameter            - Description
@@ -38,7 +39,7 @@ import { getStatus } from '../src/status'
  *  31 - AID_HORIZONTAL_VALID - 1 = horizontal position is valid and used in the observer.
 **/
 
-test('get Status from status', () => {
+test('get Status from status full', () => {
   const status: Uint32 = Uint32Array.from([0b0_1010_1010_1010_1010_1010_1010_1010_1010])[0]
   // const status: Uint32 = 2863311530
   const expected: Status = {
@@ -75,5 +76,57 @@ test('get Status from status', () => {
   }
   const result = getStatus({ status })
   expect(result).not.toBeNull()
+  expect(StatusSchema.safeParse(result).success).toBeTruthy()
   expect(result).toEqual(expected)
+})
+
+test('get Status from status_a & status_b', () => {
+  const status_a: Uint16 = Uint32Array.from([0b0_1010_1010_1010_1010])[0]
+  const status_b: Uint16 = Uint32Array.from([0b0_1010_1010_1010_1010])[0]
+  // const status_a: Uint16 = 43690
+  // const status_b: Uint16 = 43690
+  const expected: Status = {
+    main: { ok: false, health: true },
+    system: {
+      ok: false, health: true,
+      synchronized: { time: false, clock: true },
+      cpu: false
+    },
+    sensor: {
+      ok: true,
+      health: false, limits: true,
+      environmental: { vibration: false, temperature: true },
+    },
+    algorithms: {
+      ok: false, health: true,
+      initialization: { observer: false, heading: true },
+      roll_pitch: { ok: false, health: true },
+      heading: { ok: false, health: true },
+      surge_sway: { ok: false, health: true },
+      heave: { ok: false, health: true },
+    },
+    aiding: {
+      received: {
+        position: false, velocity: true,
+        heading: false
+      },
+      valid: {
+        position: true,
+        velocity: false, heading: true,
+        vertical: false, horizontal: true
+      }
+    }
+  }
+  const result = getStatus({ status_a, status_b })
+  expect(result).not.toBeNull()
+  expect(result).toEqual(expected)
+})
+
+test('null Status', () => {
+  const status_a: Uint16 = Uint32Array.from([0b0_1010_1010_1010_1010])[0]
+  const status_b: Uint16 = Uint32Array.from([0b0_1010_1010_1010_1010])[0]
+  expect(getStatus({})).toBeNull()
+  expect(getStatus({ status: 'hola '})).toBeNull()
+  expect(getStatus({ status_a })).toBeNull()
+  expect(getStatus({ status_b })).toBeNull()
 })
