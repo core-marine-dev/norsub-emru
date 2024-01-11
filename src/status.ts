@@ -38,7 +38,6 @@ import { getBit, getUint32 } from "./utils"
  *  31 - AID_HORIZONTAL_VALID - 1 = horizontal position is valid and used in the observer.
 **/
 const _getStatus = (input: Uint32): Status => {
-  console.log(`input -> ${input}`)
   return {
     main: {
       ok: getBit(input, 0),

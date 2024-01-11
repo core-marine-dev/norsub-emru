@@ -1,7 +1,7 @@
 import { z } from 'zod'
 import { Data, FieldParsed, NMEASentence } from '@coremarine/nmea-parser/lib/types'
 import { Int16Schema, Int32Schema, Int8Schema, IntegerSchema, Uint16Schema, Uint32Schema, Uint8Schema } from '@coremarine/nmea-parser/lib/schemas'
-import { StatusInputSchema } from './schemas'
+import { StatusInputSchema, StatusSchema } from './schemas'
 
 // NUMBERS
 export type Integer = z.infer<typeof IntegerSchema>
@@ -14,8 +14,7 @@ export type Uint8 = z.infer<typeof Uint8Schema>
 export type Uint16 = z.infer<typeof Uint16Schema>
 export type Uint32 = z.infer<typeof Uint32Schema>
 // export type Uint64 = z.infer<typeof Uint64Schema>
-// STATUS
-export type StatusInput = z.infer<typeof StatusInputSchema>
+
 /** STATUS
  * Bit - Parameter            - Description
  *  00 - MAIN_OK              - 1 = no errors or warnings, initialization done. Everything OK.
@@ -51,93 +50,16 @@ export type StatusInput = z.infer<typeof StatusInputSchema>
  *  30 - AID_VERTICAL_VALID   - 1 = vertical position is valid and used in the observer.
  *  31 - AID_HORIZONTAL_VALID - 1 = horizontal position is valid and used in the observer.
 **/
-export type Status = {
-  main: {
-    ok: boolean,
-    health: boolean,
-  },
-  system: {
-    ok: boolean,
-    health: boolean,
-    synchronized: {
-      time: boolean,
-      clock: boolean,
-    },
-    cpu: boolean,
-  },
-  sensor: {
-    ok: boolean,
-    health: boolean,
-    limits: boolean,
-    environmental: {
-      vibration: boolean,
-      temperature: boolean,
-    }
-  },
-  algorithms: {
-    ok: boolean,
-    health: boolean,
-    initialization: {
-      observer: boolean,
-      heading: boolean
-    },
-    roll_pitch: {
-      ok: boolean,
-      health: boolean,
-    },
-    heading: {
-      ok: boolean,
-      health: boolean,
-    },
-    surge_sway: {
-      ok: boolean,
-      health: boolean,
-    },
-    heave: {
-      ok: boolean,
-      health: boolean,
-    },
-  },
-  aiding: {
-    received: {
-      position: boolean,
-      velocity: boolean,
-      heading: boolean,
-    },
-    valid: {
-      position: boolean,
-      velocity: boolean,
-      heading: boolean,
-      vertical: boolean,
-      horizontal: boolean,
-    }
-  }
-}
-
-// export type NorsubFieldType = FieldType | 'object'
+export type Status = z.infer<typeof StatusSchema>
+export type StatusInput = z.infer<typeof StatusInputSchema>
 
 export type NorsubFieldData = Data | Status
 
-export type NorsubField = FieldParsed & {
-  // name: string,
-  // type: NorsubFieldType,
-  // data: NorsubFieldData,
-  metadata?: object,
-  // units?: string,
-  // note?: string
-}
+export type NorsubField = FieldParsed & { metadata?: object }
 
 export type NMEAWithoutFieldsData = Omit<NMEASentence, 'fields' | 'data'>
 
 export type NorsubSentence = NMEAWithoutFieldsData & {
-  // sentence: string,
-  // timestamp: Natural,
-  // checksum: Natural,
-  // protocol: {
-    // name: string,
-    // standard?: boolean,
-    // version?: string,
-  // },
   fields: NorsubField[],
   data: NorsubFieldData[],
 }
