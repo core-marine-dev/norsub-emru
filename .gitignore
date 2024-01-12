@@ -1,3 +1,9 @@
+# Custom
+.vscode
+.idea
+.DS_Store
+.nvmrc
+
 # Logs
 logs
 *.log
