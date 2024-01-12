@@ -1,19 +1,6 @@
 import { z } from 'zod'
 import { Data, FieldParsed, NMEASentence } from '@coremarine/nmea-parser/lib/types'
-import { Int16Schema, Int32Schema, Int8Schema, IntegerSchema, Uint16Schema, Uint32Schema, Uint8Schema } from '@coremarine/nmea-parser/lib/schemas'
 import { StatusInputSchema, StatusSchema } from './schemas'
-
-// NUMBERS
-export type Integer = z.infer<typeof IntegerSchema>
-export type Int8 = z.infer<typeof Int8Schema>
-export type Int16 = z.infer<typeof Int16Schema>
-export type Int32 = z.infer<typeof Int32Schema>
-// export type Int64 = z.infer<typeof Int64Schema>
-export type Natural = z.infer<typeof IntegerSchema>
-export type Uint8 = z.infer<typeof Uint8Schema>
-export type Uint16 = z.infer<typeof Uint16Schema>
-export type Uint32 = z.infer<typeof Uint32Schema>
-// export type Uint64 = z.infer<typeof Uint64Schema>
 
 /** STATUS
  * Bit - Parameter            - Description

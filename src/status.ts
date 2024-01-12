@@ -1,5 +1,6 @@
+import { Uint32 } from "@coremarine/nmea-parser/lib/types"
 import { StatusInputSchema } from "./schemas"
-import { Status, StatusInput, Uint32 } from "./types"
+import { Status, StatusInput } from "./types"
 import { getBit, getUint32 } from "./utils"
 
 /** STATUS

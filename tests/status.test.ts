@@ -1,7 +1,8 @@
 import { test, expect } from 'vitest'
-import { Status, StatusInput, Uint16, Uint32 } from '../src/types'
+import { Status } from '../src/types'
 import { getStatus } from '../src/status'
 import { StatusSchema } from '../src/schemas'
+import { Uint16, Uint32 } from '@coremarine/nmea-parser/lib/types'
 
 /** STATUS
  * Bit - Parameter            - Description
