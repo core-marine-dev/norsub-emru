@@ -1,5 +1,5 @@
 {
-  "name": "norsub-emru",
+  "name": "@coremarine/norsub-emru",
   "version": "1.0.0",
   "description": "Library to work with eMRU devices of NorSub company",
   "author": "Core Marine",
