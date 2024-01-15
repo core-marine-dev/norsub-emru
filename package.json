@@ -1,6 +1,6 @@
 {
   "name": "@coremarine/norsub-emru",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Library to work with eMRU devices of NorSub company",
   "author": "Core Marine",
   "license": "MIT",
@@ -32,7 +32,7 @@
     "test:coverage": "vitest --coverage",
     "lint": "ts-standard",
     "lint-fix": "ts-standard --fix",
-    "build": "tsc"
+    "build": "tsc && cp -r ./src/norsub.yaml ./lib"
   },
   "devDependencies": {
     "@vitest/coverage-v8": "^1.1.3",
