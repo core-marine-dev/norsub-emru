@@ -8,7 +8,7 @@ Library to read NMEA-like sentences of Norsub eMRU devices. It works same as [NM
 
 To understand how it works, please look the info of [NMEA-Parser library](https://github.com/core-marine-dev/nmea-parser/).
 
-The complete output with metada it is showd below.
+The complete output with metadata it is shown below.
 
 ```typescript
 type Status = {
